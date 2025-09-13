@@ -7,14 +7,14 @@ It was created as part of a usability study for exploring how students, faculty,
 
 ---
 
-## ⚠️ Note
+## Note
 - This is **only a low-fidelity prototype**.  
 - Some features (like AI support, automated responses, or real database connections) are **not functional** — they are included only as placeholders for testing the design.  
 - Please focus on the layout, navigation, and overall usability, not the technical backend.  
 
 ---
 
-## 📌 Features (Prototype)
+## Features (Prototype)
 - **Submit a grievance** through a simple form (categories: academic, infrastructure, harassment, administration, etc.).  
 - **Track grievance status** using a reference ID.  
 - **Escalate an issue** if it has not been resolved in time.  
