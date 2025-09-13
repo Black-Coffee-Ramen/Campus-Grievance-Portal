@@ -86,6 +86,7 @@
             border-radius: 6px;
             font-weight: 600;
             transition: all 0.2s;
+            box-sizing: border-box; /* Added for consistent width calculation */
         }
         .lofi-button:hover { background-color: var(--background-color); border-color: #c8ced3; }
         .lofi-button.primary {
@@ -94,7 +95,11 @@
             color: #fff;
         }
         .lofi-button.primary:hover { background-color: var(--primary-hover-color); border-color: var(--primary-hover-color); }
-        .lofi-button.full-width { width: 100%; display: block; }
+        .lofi-button.full-width { 
+            width: 100%; 
+            display: block;
+            margin-right: 0; /* Reset margin for full width buttons */
+        }
         .lofi-link {
             cursor: pointer;
             text-decoration: none;
@@ -617,5 +622,4 @@
     </script>
 </body>
 </html>
-
 
