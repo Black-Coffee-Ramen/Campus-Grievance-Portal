@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Low-Fidelity Wireframe - Campus Grievance Portal</title>
+    <title>Lo-Fi Wireframe - Campus Grievance Portal</title>
     <style>
         :root {
-            --primary-color: #333333;
-            --primary-hover-color: #555555;
-            --border-color: #cccccc;
+            --border-color: #ccc;
             --background-color: #f5f5f5;
-            --text-color: #000000;
-            --text-muted-color: #777777;
+            --text-color: #333;
+            --text-muted-color: #777;
+            --button-bg: #e0e0e0;
+            --button-hover-bg: #d5d5d5;
+            --button-primary-bg: #444;
+            --button-primary-hover-bg: #333;
         }
         body {
             font-family: Arial, sans-serif;
             color: var(--text-color);
-            background-color: #e0e0e0;
+            background-color: #fff;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -27,90 +29,65 @@
         .prototype-container {
             width: 100%;
             max-width: 1200px;
-            background-color: #ffffff;
+            background-color: #fff;
             border: 1px solid var(--border-color);
-            border-radius: 0;
-            overflow: hidden;
         }
         .screen-header {
             padding: 1rem 1.5rem;
             background-color: var(--background-color);
             border-bottom: 1px solid var(--border-color);
-            color: var(--text-color);
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.2rem;
             text-align: center;
         }
-        .screen-content {
-            padding: 2rem;
-        }
+        .screen-content { padding: 2rem; }
         .screen { display: none; }
         .screen.active { display: block; }
 
-        /* Form & Button Elements */
-        input[type="text"], input[type="password"], input[type="email"], textarea, select, input[type="file"] {
+        input, textarea, select {
             width: 100%;
             padding: 0.75rem;
             margin: 0.5rem 0 1rem 0;
             border: 1px solid var(--border-color);
             background-color: #fff;
-            border-radius: 0;
             box-sizing: border-box;
-            color: var(--text-color);
             font-family: inherit;
             font-size: 1rem;
         }
         input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--primary-color);
+            outline: 1px solid var(--text-color);
         }
         .lofi-button {
             display: inline-block;
             padding: 0.75rem 1.5rem;
             border: 1px solid var(--border-color);
-            background-color: #f0f0f0;
+            background-color: var(--button-bg);
             color: var(--text-color);
             cursor: pointer;
             text-align: center;
             margin-right: 1rem;
             margin-top: 1rem;
-            border-radius: 0;
-            font-weight: bold;
+            font-weight: 600;
+            box-sizing: border-box;
         }
-        .lofi-button:hover { background-color: #e0e0e0; }
+        .lofi-button:hover { background-color: var(--button-hover-bg); }
         .lofi-button.primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            background-color: var(--button-primary-bg);
             color: #fff;
         }
-        .lofi-button.primary:hover { background-color: var(--primary-hover-color); }
-        .lofi-button[disabled] {
-            background-color: #e9ecef;
-            color: #adb5bd;
-            cursor: not-allowed;
-            border-color: #dee2e6;
-        }
+        .lofi-button.primary:hover { background-color: var(--button-primary-hover-bg); }
         .lofi-button.full-width { width: 100%; display: block; }
-        .lofi-link {
-            cursor: pointer;
-            text-decoration: underline;
-            color: var(--primary-color);
-            font-weight: 500;
-        }
-        .lofi-label { display: block; font-weight: bold; margin-top: 1.25rem; margin-bottom: 0.25rem; }
+        .lofi-link { cursor: pointer; text-decoration: underline; color: #333; }
+        .lofi-label { display: block; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.25rem; }
         
-        /* Layout & Cards */
         .dashboard-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
         .lofi-card {
             border: 1px solid var(--border-color);
-            border-radius: 0;
             padding: 1.5rem;
             margin-bottom: 1rem;
         }
@@ -119,41 +96,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
         .lofi-status {
             padding: 0.25rem 0.75rem;
-            border-radius: 0;
             font-size: 0.8em;
             font-weight: bold;
-            background-color: #e9ecef;
-            border: 1px solid #dee2e6;
-            color: #495057;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            white-space: nowrap;
         }
         
-        /* Table */
         .lofi-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-        .lofi-table th, .lofi-table td { border-bottom: 1px solid var(--border-color); padding: 1rem; text-align: left; }
-        .lofi-table th { background-color: var(--background-color); font-size: 0.9rem; color: var(--text-muted-color); }
-        
-        /* Modal, Timeline, FAQ */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: #fff; padding: 2rem; border: 1px solid var(--border-color); width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; }
+        .lofi-table th, .lofi-table td { border: 1px solid var(--border-color); padding: 1rem; text-align: left; }
+        .lofi-table th { background-color: var(--background-color); }
+        .lofi-table tr:hover { background-color: var(--background-color); }
+        .lofi-table td small { color: var(--text-muted-color); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #fff; padding: 2rem; border: 1px solid #333; width: 90%; max-width: 600px; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem;}
         .modal-close { font-size: 1.5rem; cursor: pointer; border: none; background: none; color: #888; }
-        .lofi-timeline { margin-top: 1.5rem; }
-        .lofi-timeline-item { padding-left: 1.5rem; border-left: 2px solid var(--border-color); position: relative; padding-bottom: 2rem; }
-        .lofi-timeline-item:last-child { padding-bottom: 0; }
-        .lofi-timeline-item::before { content: ''; position: absolute; left: -9px; top: 5px; width: 16px; height: 16px; border-radius: 50%; background-color: #fff; border: 2px solid var(--border-color); }
-        .lofi-timeline-item.active::before { border-color: var(--primary-color); background-color: var(--primary-color); }
-        .faq-item { border-bottom: 1px solid var(--border-color); padding: 1rem 0; }
-        .faq-item summary { font-weight: bold; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-        .faq-item summary::-webkit-details-marker { display: none; }
-        .faq-item summary::after { content: '+'; font-size: 1.5rem; }
-        .faq-item[open] summary::after { content: '−'; }
-        .faq-item p { margin-top: 1rem; line-height: 1.6; color: var(--text-muted-color); }
     </style>
 </head>
 <body>
@@ -161,150 +126,107 @@
     <div class="prototype-container">
 
         <div id="login-screen" class="screen active">
-            <!-- Login Screen Content -->
-             <div class="screen-header">Campus Grievance Portal</div>
-             <div class="screen-content">
-                <div class="form-container" style="max-width: 400px; margin: auto;">
-                    <h2 style="text-align:center;">Portal Login</h2>
-                    <label class="lofi-label" for="login-id">Student / Staff ID</label>
-                    <input type="text" id="login-id" placeholder="Enter your ID">
-                    <label class="lofi-label" for="login-pass">Password</label>
-                    <input type="password" id="login-pass" placeholder="Enter your password">
-                    <div class="lofi-button primary full-width" onclick="login('student')">Login as Student</div>
-                    <div class="lofi-button full-width" onclick="login('admin')">Login as Admin</div>
-                </div>
+             <div class="screen-header">Grievance Portal</div>
+             <div class="screen-content" style="max-width: 400px; margin: 2rem auto;">
+                <h2 style="text-align:center;">Login</h2>
+                <label class="lofi-label" for="login-id">Your ID</label>
+                <input type="text" id="login-id">
+                <label class="lofi-label" for="login-pass">Password</label>
+                <input type="password" id="login-pass">
+                <div class="lofi-button primary full-width" onclick="login('student')">Login (Student)</div>
+                <div class="lofi-button full-width" onclick="login('admin')">Login (Admin)</div>
             </div>
         </div>
 
         <div id="student-dashboard-screen" class="screen">
-            <!-- Student Dashboard Content -->
-            <div class="screen-header">Student Dashboard</div>
+            <div class="screen-header">Dashboard</div>
             <div class="screen-content">
                 <div class="dashboard-header">
                     <h2 id="student-welcome-message"></h2>
-                    <div>
-                         <span class="lofi-link" onclick="navigateTo('faq-screen')">Help/FAQ</span>
-                         <span class="lofi-link" style="margin-left: 1.5rem;" onclick="logout()">Logout</span>
-                    </div>
+                    <span class="lofi-link" onclick="logout()">Logout</span>
                 </div>
-                <div class="lofi-button primary" onclick="navigateTo('submit-form-screen')">+ Submit New Grievance</div>
-                <h3 style="margin-top: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Active Grievances</h3>
-                <div id="student-active-grievances"><p style="color: var(--text-muted-color);">You have no active grievances.</p></div>
-                <h3 style="margin-top: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Resolved Grievances</h3>
-                <div id="student-resolved-grievances"><p style="color: var(--text-muted-color);">You have no resolved grievances.</p></div>
+                <div class="lofi-button primary" onclick="navigateTo('submit-form-screen')">+ New Grievance</div>
+                <h3 style="margin-top: 2.5rem;">Active Grievances</h3>
+                <div id="student-active-grievances"></div>
+                <h3 style="margin-top: 2.5rem;">Resolved Grievances</h3>
+                <div id="student-resolved-grievances"></div>
             </div>
         </div>
         
         <div id="submit-form-screen" class="screen">
-            <!-- Submit Form Screen Content -->
-            <div class="screen-header">Submit a New Grievance</div>
+            <div class="screen-header">New Grievance Form</div>
             <div class="screen-content">
-                <label class="lofi-label" for="category">Grievance Category</label>
+                <label class="lofi-label" for="category">Category</label>
                 <select id="category">
                     <option value="">Select a category...</option>
                     <option value="Academic">Academic</option>
                     <option value="Administrative">Administrative</option>
                     <option value="Facilities">Facilities</option>
+                    <option value="Hostel">Hostel</option>
+                    <option value="Other">Other</option>
                 </select>
                 <label class="lofi-label" for="title">Title</label>
-                <input type="text" id="title" placeholder="e.g., Incorrect grade awarded for final exam">
-                
+                <input type="text" id="title" placeholder="e.g., Broken chair in library">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <label class="lofi-label" for="description">Detailed Description</label>
-                    <!-- AI feature removed and button disabled -->
-                    <div class="lofi-button" disabled>AI: Help Me Write</div>
+                    <label class="lofi-label" for="description">Description</label>
+                    <div class="lofi-button" style="margin-top:0; background: #f0f0f0; cursor: not-allowed; color: #999;">✨ AI Help</div>
                 </div>
-                <textarea id="description" rows="5" placeholder="Describe your issue in detail."></textarea>
-                
-                <label class="lofi-label">Upload Supporting Files (Optional)</label>
-                <input type="file" style="margin-top: 0.5rem;">
-                <div style="margin: 1.5rem 0; display:flex; align-items:center;"><input type="checkbox" id="anon" style="width: auto; height: 1rem; margin-right: 0.5rem;"><label for="anon" style="font-weight:normal; margin:0;">Submit Anonymously</label></div>
-                <div class="lofi-button primary" onclick="submitNewGrievance()">Submit Grievance</div>
-                <div class="lofi-button" onclick="goBackToDashboard()">Go Back</div>
+                <textarea id="description" rows="5" placeholder="Describe your issue in detail..."></textarea>
+                <div style="margin: 1rem 0; display:flex; align-items:center;">
+                    <input type="checkbox" id="anonymous-checkbox" style="width: auto; margin-right: 0.5rem;">
+                    <label for="anonymous-checkbox" style="font-weight:normal; margin:0;">Submit Anonymously</label>
+                </div>
+                <div class="lofi-button primary" onclick="submitNewGrievance()">Submit</div>
+                <div class="lofi-button" onclick="goBackToDashboard()">Cancel</div>
             </div>
         </div>
 
         <div id="confirmation-screen" class="screen">
-            <!-- Confirmation Screen Content -->
-            <div class="screen-header">Submission Successful</div>
+            <div class="screen-header">Success</div>
             <div class="screen-content" style="text-align: center; padding: 4rem 2rem;">
-                <h1 style="font-size: 4rem; color: var(--text-color); border:none;">✓</h1>
                 <h2>Grievance Submitted!</h2>
-                <p>Your reference number is: <strong id="new-grievance-id"></strong></p>
-                <p style="margin-top: 2rem; color: var(--text-muted-color);">You can track the status from your dashboard.</p>
+                <p>Your ticket number is: <strong id="new-grievance-id" style="font-size:1.5rem; background:#eee; padding: 0.5rem 1rem;"></strong></p>
                 <div class="lofi-button primary" onclick="navigateTo('student-dashboard-screen')">Back to Dashboard</div>
             </div>
         </div>
 
         <div id="tracking-screen" class="screen">
-            <!-- Tracking Screen Content -->
              <div class="screen-header">Track Grievance</div>
              <div class="screen-content">
                 <div class="dashboard-header">
                     <h2 id="tracking-id-header"></h2>
-                    <div class="lofi-button" onclick="goBackToDashboard()">Go Back</div>
+                    <div class="lofi-button" onclick="goBackToDashboard()">Back</div>
                 </div>
                 <div class="lofi-card">
                     <p><strong>Title:</strong> <span id="tracking-title"></span></p>
-                    <p><strong>Category:</strong> <span id="tracking-category"></span></p>
                     <p><strong>Status:</strong> <span id="tracking-status" class="lofi-status"></span></p>
-                    <p><strong>Submitted:</strong> <span id="tracking-date"></span> by <span id="tracking-submitter"></span></p>
-                    <strong style="display:block; margin-top:1rem;">Description:</strong>
-                    <p id="tracking-description" style="white-space: pre-wrap; margin-top:0.5rem; color: var(--text-muted-color);"></p>
+                    <p><strong>Submitted:</strong> <span id="tracking-date"></span></p>
+                    <strong>Description:</strong>
+                    <p id="tracking-description" style="margin-top:0.5rem;"></p>
                 </div>
-                <h3 style="margin-top: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Status Timeline</h3>
-                <div class="lofi-timeline" id="tracking-timeline"></div>
             </div>
         </div>
 
         <div id="admin-dashboard-screen" class="screen">
-            <!-- Admin Dashboard Content -->
             <div class="screen-header">Admin Dashboard</div>
             <div class="screen-content">
                  <div class="dashboard-header">
                     <h2>All Grievances</h2>
                     <span class="lofi-link" onclick="logout()">Logout</span>
                 </div>
-                <!-- Filters are now static placeholders -->
-                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-                    <strong>Filter by:</strong>
-                    <select id="filter-status" style="margin:0;"><option>Status: All</option></select>
-                    <select id="filter-category" style="margin:0;"><option>Category: All</option></select>
+                <div style="display: flex; gap: 1rem;">
+                    <strong>Filters:</strong>
+                    <select disabled><option>Status: All</option></select>
+                    <select disabled><option>Category: All</option></select>
                 </div>
                 <table class="lofi-table">
-                    <thead><tr><th>ID</th><th>Title</th><th>Category</th><th>Submitter</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+                    <thead><tr><th>ID</th><th>Title</th><th>Submitter</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
                     <tbody id="admin-table-body"></tbody>
                 </table>
             </div>
         </div>
-        
-        <div id="faq-screen" class="screen">
-            <!-- FAQ Screen Content -->
-            <div class="screen-header">Help & FAQ</div>
-            <div class="screen-content">
-                <div class="dashboard-header">
-                    <h2>FAQs</h2>
-                    <div class="lofi-button" onclick="goBackToDashboard()">Go Back</div>
-                </div>
-                <div class="faq-list">
-                    <details class="faq-item">
-                        <summary>How do I submit a grievance?</summary>
-                        <p>From your student dashboard, click the "+ Submit New Grievance" button and fill in all the required fields.</p>
-                    </details>
-                    <details class="faq-item">
-                        <summary>Is my submission anonymous?</summary>
-                        <p>You have the option to submit your grievance anonymously by checking the "Submit Anonymously" box on the form.</p>
-                    </details>
-                    <details class="faq-item">
-                        <summary>What happens after I submit?</summary>
-                        <p>Your grievance is assigned a unique ID and routed to the relevant department. You can track its status from your dashboard.</p>
-                    </details>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <!-- Admin Details Modal -->
     <div id="admin-details-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -316,32 +238,18 @@
     </div>
 
     <script>
-        // --- DATA STORE & SESSION ---
         let currentUser = null;
+        let lastTicketId = 12347;
         let grievances = [
-            { id: 'GRV-12345', title: 'Incorrect Grade in Physics', category: 'Academic', submittedBy: '10210456', submitterName: 'Jane Doe', email: 'jane.doe@university.edu', description: 'My final grade was calculated incorrectly.', date: '2025-09-12', status: 'Under Review', isAnonymous: false, history: [{ status: 'Under Review', date: '2025-09-13', notes: 'Assigned to the Academic Council.'}, { status: 'Submitted', date: '2025-09-12', notes: 'Grievance submitted.'}] },
-            { id: 'GRV-12344', title: 'Faulty Wi-Fi in Library', category: 'Facilities', submittedBy: '20310222', submitterName: 'Mark Smith', email: 'mark.smith@university.edu', description: 'The Wi-Fi is unstable.', date: '2025-09-10', status: 'New', isAnonymous: false, history: [{ status: 'Submitted', date: '2025-09-10', notes: 'Grievance submitted.'}] },
-            { id: 'GRV-12301', title: 'Hostel Room Change Request', category: 'Hostel', submittedBy: '10210456', submitterName: 'Jane Doe', email: 'jane.doe@university.edu', description: 'Requesting a room change.', date: '2025-09-01', status: 'Resolved', isAnonymous: false, history: [{ status: 'Resolved', date: '2025-09-05', notes: 'Room change approved.'}, { status: 'Submitted', date: '2025-09-01', notes: 'Grievance submitted.'}]},
-            { id: 'GRV-12343', title: 'Misconduct during lecture', category: 'Academic', submittedBy: 'Anonymous', submitterName: 'Anonymous', email: null, description: 'Inappropriate comments were made.', date: '2025-09-09', status: 'New', isAnonymous: true, history: [{ status: 'Submitted', date: '2025-09-09', notes: 'Grievance submitted.'}] }
+            { id: 12345, title: 'Incorrect Grade in Physics', category: 'Academic', submittedBy: '10210456', submitterName: 'Jane Doe', email: 'jane.doe@example.com', description: 'My final grade was calculated incorrectly.', date: '2025-09-12', status: 'In Review'},
+            { id: 12344, title: 'Faulty Wi-Fi in Library', category: 'Facilities', submittedBy: '20310222', submitterName: 'Mark Smith', email: 'mark.smith@example.com', description: 'Wi-Fi is unstable on the 3rd floor.', date: '2025-09-10', status: 'New'},
+            { id: 12346, title: 'Hostel Room Change Request', category: 'Hostel', submittedBy: '10210456', submitterName: 'Jane Doe', email: 'jane.doe@example.com', description: 'Requesting a room change.', date: '2025-09-01', status: 'Resolved'},
+            { id: 12347, title: 'Misconduct during lecture', category: 'Academic', submittedBy: 'Anonymous', submitterName: 'Anonymous', email: null, description: 'A professor made inappropriate comments.', date: '2025-09-09', status: 'New'}
         ];
 
-        // --- AI API SIMULATION (DISABLED) ---
-        async function callGeminiApi(prompt) {
-            // This function is intentionally left blank for the low-fidelity version.
-            console.log("AI function called, but is disabled.");
-            return "";
-        }
-        async function handleAiWrite(button) {
-            // This function is intentionally left blank for the low-fidelity version.
-        }
-        async function handleAiSummarize(button, grievanceId) {
-             // This function is intentionally left blank for the low-fidelity version.
-        }
-
-        // --- CORE APP LOGIC ---
         function login(role) {
             if (role === 'student') {
-                currentUser = { id: '10210456', name: 'Jane Doe', role: 'student', email: 'jane.doe@university.edu' };
+                currentUser = { id: '10210456', name: 'Jane Doe', role: 'student', email: 'jane.doe@example.com' };
                 navigateTo('student-dashboard-screen');
             } else {
                 currentUser = { id: 'admin01', name: 'Admin', role: 'admin' };
@@ -353,10 +261,9 @@
         function navigateTo(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
-            window.scrollTo(0, 0);
             if (currentUser) {
                 if (screenId === 'student-dashboard-screen') renderStudentDashboard();
-                if (screenId === 'admin-dashboard-screen') renderAdminTable(grievances); // Show all by default now
+                if (screenId === 'admin-dashboard-screen') renderAdminTable(grievances);
             }
         }
 
@@ -365,7 +272,7 @@
         }
         
         function renderStudentDashboard() {
-            document.getElementById('student-welcome-message').textContent = `Welcome, ${currentUser.name}!`;
+            document.getElementById('student-welcome-message').textContent = `Welcome, ${currentUser.name}`;
             const userGrievances = grievances.filter(g => g.submittedBy === currentUser.id);
             const activeContainer = document.getElementById('student-active-grievances');
             const resolvedContainer = document.getElementById('student-resolved-grievances');
@@ -375,10 +282,10 @@
             const resolved = userGrievances.filter(g => g.status === 'Resolved');
 
             if(active.length) active.forEach(g => activeContainer.appendChild(createGrievanceCard(g)));
-            else activeContainer.innerHTML = `<p style="color: var(--text-muted-color);">You have no active grievances.</p>`;
+            else activeContainer.innerHTML = `<p style="color: var(--text-muted-color);">No active grievances.</p>`;
             
             if(resolved.length) resolved.forEach(g => resolvedContainer.appendChild(createGrievanceCard(g)));
-            else resolvedContainer.innerHTML = `<p style="color: var(--text-muted-color);">You have no resolved grievances.</p>`;
+             else resolvedContainer.innerHTML = `<p style="color: var(--text-muted-color);">No resolved grievances.</p>`;
         }
 
         function createGrievanceCard(g) {
@@ -391,31 +298,25 @@
         
         function submitNewGrievance() {
             const title = document.getElementById('title').value;
-            const category = document.getElementById('category').value;
             const description = document.getElementById('description').value;
-            const isAnonymous = document.getElementById('anon').checked;
+            const isAnonymous = document.getElementById('anonymous-checkbox').checked;
 
-            if (!title || !category || !description) { 
-                // Using console.error instead of alert
-                console.error('Title, Category, and Description are required.'); 
-                return; 
-            }
+            if (!title || !description) { alert('Title and Description are required.'); return; }
             
+            lastTicketId++;
             const newGrievance = {
-                id: `GRV-${Math.floor(10000 + Math.random() * 90000)}`,
-                title, category, description, isAnonymous,
+                id: lastTicketId,
+                title, description,
+                category: document.getElementById('category').value,
                 submittedBy: isAnonymous ? 'Anonymous' : currentUser.id,
                 submitterName: isAnonymous ? 'Anonymous' : currentUser.name,
                 email: isAnonymous ? null : currentUser.email,
-                date: '2025-09-14',
-                status: 'New',
-                history: [{ status: 'Submitted', date: '2025-09-14', notes: 'Grievance submitted.' }]
+                date: new Date().toISOString().split('T')[0],
+                status: 'New'
             };
             grievances.unshift(newGrievance);
             
             document.getElementById('new-grievance-id').textContent = newGrievance.id;
-            document.getElementById('submit-form-screen').querySelectorAll('input, textarea, select').forEach(el => el.value = '');
-            document.getElementById('anon').checked = false;
             navigateTo('confirmation-screen');
         }
 
@@ -423,69 +324,48 @@
             const g = grievances.find(item => item.id === id);
             if (!g) return;
             
-            document.getElementById('tracking-id-header').textContent = `Grievance ${g.id}`;
+            document.getElementById('tracking-id-header').textContent = `Ticket #${g.id}`;
             document.getElementById('tracking-title').textContent = g.title;
-            document.getElementById('tracking-category').textContent = g.category;
             document.getElementById('tracking-date').textContent = g.date;
-            document.getElementById('tracking-submitter').textContent = g.isAnonymous ? 'Anonymous' : g.submitterName;
             document.getElementById('tracking-description').textContent = g.description;
-            
-            const statusEl = document.getElementById('tracking-status');
-            statusEl.textContent = g.status;
-
-            const timelineEl = document.getElementById('tracking-timeline');
-            timelineEl.innerHTML = '';
-            g.history.forEach((item, index) => {
-                const itemEl = document.createElement('div');
-                itemEl.className = index === 0 ? 'lofi-timeline-item active' : 'lofi-timeline-item';
-                itemEl.innerHTML = `<strong>${item.status}</strong><div style="color:var(--text-muted-color); font-size:0.9rem;">Date: ${item.date}</div><div>${item.notes}</div>`;
-                timelineEl.appendChild(itemEl);
-            });
+            document.getElementById('tracking-status').textContent = g.status;
             navigateTo('tracking-screen');
         }
 
         function renderAdminTable(data) {
             const tableBody = document.getElementById('admin-table-body');
             tableBody.innerHTML = '';
-            data.forEach(g => {
+            const sortedData = [...data].sort((a,b) => b.id - a.id);
+            sortedData.forEach(g => {
                 const row = tableBody.insertRow();
-                const submitterInfo = g.isAnonymous ? 'Anonymous' : `${g.submitterName}`;
+                const submitterInfo = g.submitterName === 'Anonymous' ? 'Anonymous' : `${g.submitterName}<br><small style="color:var(--text-muted-color);">${g.email}</small>`;
                 row.innerHTML = `
-                    <td>${g.id}</td><td>${g.title}</td><td>${g.category}</td><td>${submitterInfo}</td>
+                    <td>${g.id}</td><td>${g.title}</td><td>${submitterInfo}</td>
                     <td>${g.date}</td><td><span class="lofi-status">${g.status}</span></td>
-                    <td><div class="lofi-link" onclick="viewGrievanceDetails('${g.id}')">View</div></td>`;
+                    <td><div class="lofi-link" onclick="viewGrievanceDetails(${g.id})">View</div></td>`;
             });
         }
 
-        function updateGrievanceStatus(id, newStatus, notes = '') {
+        function updateGrievanceStatus(id, newStatus) {
             const g = grievances.find(item => item.id === id);
-            if (!g) return;
-            g.status = newStatus;
-            g.history.unshift({ status: newStatus, date: '2025-09-14', notes: notes || `Status updated.` });
+            if (g) g.status = newStatus;
             closeModal();
             renderAdminTable(grievances);
         }
         
         function viewGrievanceDetails(id) {
             const g = grievances.find(item => item.id === id);
-            document.getElementById('modal-grievance-id').textContent = `Details for ${id}`;
+            document.getElementById('modal-grievance-id').textContent = `Ticket #${id}`;
             const body = document.getElementById('modal-body');
-            const submitterInfo = g.isAnonymous ? 'Anonymous' : `${g.submitterName} (${g.email})`;
+            const submitterInfo = g.submitterName === 'Anonymous' ? 'Anonymous' : `${g.submitterName} (${g.email})`;
             body.innerHTML = `
+                <p><strong>From:</strong> ${submitterInfo}</p>
                 <p><strong>Title:</strong> ${g.title}</p>
-                <p><strong>Submitted By:</strong> ${submitterInfo}</p>
-                <p><strong>Status:</strong> ${g.status}</p>
-                 <div style="display:flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
-                    <strong>Description:</strong>
-                     <!-- AI button disabled -->
-                    <div class="lofi-button" disabled>AI: Summarize</div>
-                </div>
-                <div class="lofi-card" style="white-space: pre-wrap; background-color: var(--background-color); margin-top:0.5rem;">${g.description}</div>
-                <h4 style="margin-top:1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Actions</h4>
+                <div class="lofi-card" style="margin-top:0.5rem;">${g.description}</div>
+                <h4 style="margin-top:1.5rem;">Actions</h4>
                 <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
-                    <div class="lofi-button" onclick="updateGrievanceStatus('${id}', 'Under Review')">Mark as Under Review</div>
-                    <div class="lofi-button primary" onclick="updateGrievanceStatus('${id}', 'Resolved')">Mark as Resolved</div>
-                    <div class="lofi-button" onclick="closeModal()">Back</div>
+                    <div class="lofi-button" onclick="updateGrievanceStatus(${id}, 'In Review')">Mark as In Review</div>
+                    <div class="lofi-button primary" onclick="updateGrievanceStatus(${id}, 'Resolved')">Mark as Resolved</div>
                 </div>`;
             document.getElementById('admin-details-modal').style.display = 'flex';
         }
@@ -496,3 +376,8 @@
     </script>
 </body>
 </html>
+
+
+
+
+
