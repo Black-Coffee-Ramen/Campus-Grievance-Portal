@@ -3,7 +3,8 @@
 This project is a **low-fidelity prototype** of a Campus Grievance Redressal Portal.  
 It was created as part of a usability study for exploring how students, faculty, and staff might report and track grievances on campus.  
 
-👉 **Live Prototype:** [Campus-Grievance-Portal](https://black-coffee-ramen.github.io/Campus-Grievance-Portal/)  
+**Live Prototype:** [Campus-Grievance-Portal](https://black-coffee-ramen.github.io/Campus-Grievance-Portal/)  
+**Updated Prototype:** [A lil more than lo-fi] (https://athiyo.github.io/Campus-Grievance-Portal/)
 
 ---
 
