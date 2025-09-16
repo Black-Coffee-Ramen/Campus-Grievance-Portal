@@ -214,7 +214,7 @@
                     <h2>All Grievances</h2>
                     <span class="lofi-link" onclick="logout()">Logout</span>
                 </div>
-                <div style="display: flex; gap: 1rem;">
+                <div style="display: flex; gap: 1rem; align-items: center;">
                     <strong>Filters:</strong>
                     <select disabled><option>Status: All</option></select>
                     <select disabled><option>Category: All</option></select>
@@ -342,7 +342,7 @@
                 row.innerHTML = `
                     <td>${g.id}</td><td>${g.title}</td><td>${submitterInfo}</td>
                     <td>${g.date}</td><td><span class="lofi-status">${g.status}</span></td>
-                    <td><div class="lofi-link" onclick="viewGrievanceDetails(${g.id})">View</div></td>`;
+                    <td><div class="lofi-link" onclick="viewGrievanceDetails(${g.id})">View / Action</div></td>`;
             });
         }
 
@@ -361,7 +361,11 @@
             body.innerHTML = `
                 <p><strong>From:</strong> ${submitterInfo}</p>
                 <p><strong>Title:</strong> ${g.title}</p>
-                <div class="lofi-card" style="margin-top:0.5rem;">${g.description}</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+                    <h4 style="margin:0;">Description</h4>
+                    <div class="lofi-button" style="margin-top:0; cursor: not-allowed; background: #f0f0f0; color: #999;">✨ Generate Summary</div>
+                </div>
+                <div class="lofi-card" style="margin-top:0;">${g.description}</div>
                 <h4 style="margin-top:1.5rem;">Actions</h4>
                 <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
                     <div class="lofi-button" onclick="updateGrievanceStatus(${id}, 'In Review')">Mark as In Review</div>
@@ -376,8 +380,4 @@
     </script>
 </body>
 </html>
-
-
-
-
 
